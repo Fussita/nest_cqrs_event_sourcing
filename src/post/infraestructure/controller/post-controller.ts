@@ -6,13 +6,15 @@ import { DataSource } from 'typeorm'
 import { Mongoose } from "mongoose";
 import { v4 as uuidv4 } from 'uuid'
 import { OdmPostCommandRepository } from "../repository/odm-post-command-repository";
+import { IPostQueryRepository } from "src/post/domain/repository/post-query-repository";
+import { IPostCommandRepository } from "src/post/domain/repository/post-command-repository";
 
 @Controller('post')
 export class PostController {
 
-    mongoPostQueryRepository: OdmPostQueryRepository 
-    mongoPostCommandRepository: OdmPostCommandRepository 
-    postgresPostCommandRepository: OrmPostCommandRepository
+    mongoPostQueryRepository: IPostQueryRepository 
+    mongoPostCommandRepository: IPostCommandRepository 
+    postgresPostCommandRepository: IPostCommandRepository
     syncroService: SyncEventService
         
     constructor(

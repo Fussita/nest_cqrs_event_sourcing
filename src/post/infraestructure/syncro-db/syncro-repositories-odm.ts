@@ -1,14 +1,14 @@
+import { IPostCommandRepository } from "src/post/domain/repository/post-command-repository"
 import { PostAddedEvent, PostUpdateEvent, PostDeleteEvent } from "../event-persistence/post-events"
-import { OdmPostCommandRepository } from "../repository/odm-post-command-repository"
 import { EventStore } from "./event-store"
 
 export class SyncEventService {
-    private odmRepository: OdmPostCommandRepository
+    private odmRepository: IPostCommandRepository
     private eventStore: EventStore
     private lastSyncDate: Date = new Date()
 
     constructor ( 
-        odmRepository: OdmPostCommandRepository
+        odmRepository: IPostCommandRepository
     ) {
         this.odmRepository = odmRepository
         this.eventStore = EventStore.getInstance()
@@ -38,7 +38,7 @@ export class SyncEventService {
     }
 
     private applyEventDelete( event: PostDeleteEvent ): void { 
-        this.odmRepository.delPostById( event.post_id )
+        this.odmRepository.deletePostById( event.post_id )
         console.log(' applied on mongodb: delEvent ' + event.post_id)
     }
 
