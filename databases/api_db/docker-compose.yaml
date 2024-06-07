@@ -1,0 +1,27 @@
+version: '4'
+
+services:
+  db:
+    image: postgres:14.3
+    restart: always
+    ports:
+      - "${DB_PORT}:5432"
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    container_name: db_sql
+    volumes:
+      - ../../postgres:/var/lib/postgresql/data
+  mongo:
+    image: mongo:5
+    restart: always
+    ports:
+      - "${DB_NO_PORT}:27017"
+    environment:
+      MONGODB_DATABASE: ${DB_NO_NAME}
+      #MONGO_INITDB_ROOT_USERNAME: ${DB_NO_USERNAME}
+      #MONGO_INITDB_ROOT_PASSWORD: ${DB_NO_PASSWORD}
+    container_name: db_nosql
+    hostname: ${DB_NO_HOST}
+    volumes:
+      - ../../mongodb:/var/lib/mongodb/data

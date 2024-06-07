@@ -1,0 +1,18 @@
+
+
+npm i --save @nestjs/config @nestjs/jwt @nestjs/typeorm @types/uuid uuid bcrypt class-validator 
+
+npm i --save @nestjs/config
+npm i --save @nestjs/jwt
+npm i --save @nestjs/schedule
+npm i --save @nestjs/typeorm
+npm i --save @types/uuid
+npm i --save uuid
+npm i --save bcrypt
+npm i --save class-validator
+
+npm i --save mongoose
+npm i --save pg
+
+npm i --save node-mailjet
+npm i --save firebase-admin
