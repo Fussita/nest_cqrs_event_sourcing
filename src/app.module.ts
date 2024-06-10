@@ -2,9 +2,9 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { ScheduleModule } from '@nestjs/schedule';
-import { OrmDatabaseProvider } from './common/infraestructure/provider/orm-db-provider';
 import { PostController } from './post/infraestructure/controller/post-controller';
-import { OdmDataBaseProvider } from './common/infraestructure/provider/odm-db-provider';
+import { PostgresDataBaseProvider } from './common/infraestructure/provider/sql/postgres-db-provider';
+import { MongoDataBaseProvider } from './common/infraestructure/provider/nosql/mongo-db-provider';
 
 @Module({
   imports: [
@@ -19,8 +19,8 @@ import { OdmDataBaseProvider } from './common/infraestructure/provider/odm-db-pr
     PostController
   ],
   providers: [
-    OrmDatabaseProvider,
-    OdmDataBaseProvider
+    PostgresDataBaseProvider,
+    MongoDataBaseProvider
   ],
 })
 export class AppModule {}

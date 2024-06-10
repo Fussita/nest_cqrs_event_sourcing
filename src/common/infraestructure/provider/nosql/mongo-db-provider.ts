@@ -1,8 +1,9 @@
 import { Provider } from "@nestjs/common";
 import { connect } from "mongoose";
 
-export const OdmDataBaseProvider: Provider = {
-    provide: 'MongoDataSource',
+export const MongoDataBaseProvider: Provider = 
+  {
+    provide: 'NoSQLDataSource',
     useFactory: async () => {
       try {
         const connection = await connect('mongodb://localhost:27017/mongodb');
@@ -12,4 +13,5 @@ export const OdmDataBaseProvider: Provider = {
         throw error;
       }
     },
-}
+  }
+

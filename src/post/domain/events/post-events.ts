@@ -1,4 +1,4 @@
-import { EventPersistence } from "src/common/application/event-persistence/event-persistence"
+import { EventPersistence } from "src/common/domain/event/event-persistence"
 
 export class PostAddedEvent extends EventPersistence {
     post_id: string

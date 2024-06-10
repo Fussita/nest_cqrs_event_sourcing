@@ -1,8 +1,9 @@
-import { IPostCommandRepository } from 'src/post/domain/repository/post-command-repository';
 import { OdmPost, OdmPostSchema } from '../entity/odm-post'
 import { Model, Mongoose } from 'mongoose';
+import { PostEntity } from 'src/post/domain/entity/post-entity';
+import { IPostRepository } from 'src/post/domain/repository/post-repository.interface';
 
-export class OdmPostCommandRepository implements IPostCommandRepository {
+export class OdmPostRepository implements IPostRepository {
 
     private readonly model: Model<OdmPost>;
 
@@ -19,6 +20,11 @@ export class OdmPostCommandRepository implements IPostCommandRepository {
     async updatePostById( id: string, content: string ){
         const resultFind = await this.model.findOne( { id_post: id } )
         const resultUpdate = await resultFind.updateOne( { content: content, last_modified_date: new Date() }  )
+    }
+    
+    async getPostById( id: string ): Promise<PostEntity> {
+        const result = await this.model.findOne( { id_post: id } )
+        return PostEntity.create( result.id, result.content )
     }
 
 }
