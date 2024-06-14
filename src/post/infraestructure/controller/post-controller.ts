@@ -26,15 +26,16 @@ export class PostController {
 
     @Get('write')
     async writeRoute() {
+    
         const suscription = this.eventBus.subscriber(
             (event: PostAddedEvent) => {
                 this.noSQLPostRepository.savePost( event.post_id, event.content )
             }
         )
-        const ev = new PostAddedEvent(uuidv4(), 'Chavelo vive')
-        const result = await this.SQLPostRepository.savePost( ev.post_id, ev.content )
-        this.eventBus.publisher(suscription.id, ev)
-        suscription.unsuscribe()
+        const eventCreated = new PostAddedEvent(uuidv4(), 'Chavelo vive')
+        const result = await this.SQLPostRepository.savePost( eventCreated.post_id, eventCreated.content )
+        this.eventBus.publisher(suscription.id, eventCreated)
+        suscription.unsuscribe()   
     
     }
 
