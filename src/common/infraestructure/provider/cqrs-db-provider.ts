@@ -1,16 +1,21 @@
 import { Provider } from "@nestjs/common"
+import { MongoDataBaseProvider } from "./nosql/mongo-db-provider"
+import { PostgresDataBaseProvider } from "./sql/postgres-db-provider"
 
 export const CQRSDatabaseProvider: Provider[] = [
-    {
-      provide: 'SQLProvider',
-      useFactory: async (connection) => { return connection },  
-      inject: ['PostgresCommandUser'],
-    },
+  MongoDataBaseProvider,
+  PostgresDataBaseProvider,
+  {
+    provide: 'SQLDataSource',
+    useFactory: async (connection) => { return connection },  
+    inject: ['PostgresDataSource'],
+  },
 
-    {
-      provide: 'NoSQLProvider',
-      useFactory: async (connection) => { return connection },  
-      inject: ['MongoQueryUser'],
-    },    
+  {
+    provide: 'NoSQLDataSource',
+    useFactory: async (connection) => { return connection },  
+    inject: ['MongoDataSource'],
+  },    
+
 ]
   

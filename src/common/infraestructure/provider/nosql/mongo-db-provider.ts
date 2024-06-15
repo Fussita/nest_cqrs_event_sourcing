@@ -3,7 +3,7 @@ import { connect } from "mongoose";
 
 export const MongoDataBaseProvider: Provider = 
   {
-    provide: 'NoSQLDataSource',
+    provide: 'MongoDataSource',
     useFactory: async () => {
       try {
         const connection = await connect('mongodb://localhost:27017/mongodb');
