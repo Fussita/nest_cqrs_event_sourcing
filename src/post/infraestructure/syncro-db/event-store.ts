@@ -1,4 +1,4 @@
-import { EventPersistence } from "src/common/application/event-persistence/event-persistence"
+import { EventPersistence } from "src/common/domain/event-persistence/event-persistence"
 
 export class EventStore {
     private eventStore: EventPersistence[] = []
