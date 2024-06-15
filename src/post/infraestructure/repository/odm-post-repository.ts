@@ -27,5 +27,10 @@ export class OdmPostRepository implements IPostRepository {
         return PostEntity.create( result.id, result.content )
     }
 
+    async getPostByContent( content: string ): Promise<PostEntity> {
+        const result = await this.model.findOne( { content: content } )
+        return PostEntity.create( result.id, result.content )
+    }
+
 }
 

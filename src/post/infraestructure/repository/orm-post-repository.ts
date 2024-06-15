@@ -9,8 +9,14 @@ export class OrmPostRepository extends Repository<OrmPost> implements IPostRepos
         super( OrmPost, ormDS.createEntityManager() )
     }
 
-    getPostById(id: string): Promise<PostEntity> {
-        throw new Error('Method not implemented.')
+    async getPostByContent( content: string ): Promise<PostEntity> {
+        const result = await this.findOneBy( { content: content } )
+        return PostEntity.create( result.id, result.content )
+    }
+
+    async getPostById(id: string): Promise<PostEntity> {
+        const result = await this.findOneBy( { id: id } )
+        return PostEntity.create( result.id, result.content )
     }
     
     async savePost( id: string, content: string ) {

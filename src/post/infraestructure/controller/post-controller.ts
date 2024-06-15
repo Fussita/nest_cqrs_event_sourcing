@@ -14,6 +14,7 @@ export class PostController {
     noSQLPostRepository: IPostRepository 
     SQLPostRepository: IPostRepository
     eventBus: EventBus
+    id_testing = '4f83b9ee-7489-4c06-9069-f3ea6471d9cf'
         
     constructor(
         @Inject('SQLDataSource') ormDS: DataSource,
@@ -24,19 +25,31 @@ export class PostController {
         this.eventBus = EventBus.getInstance()
     }
 
+    @Get('sql') 
+    async readsql() {
+        const result = await this.SQLPostRepository.getPostById(this.id_testing)
+        return result
+    }
+
+    @Get('nosql') 
+    async readnosql() {
+        const result = await this.noSQLPostRepository.getPostById(this.id_testing)
+        return result
+    }
+
     @Get('write')
     async writeRoute() {
-    
+        
         const suscription = this.eventBus.subscriber(
             (event: PostAddedEvent) => {
                 this.noSQLPostRepository.savePost( event.post_id, event.content )
             }
         )
-        const eventCreated = new PostAddedEvent(uuidv4(), 'Chavelo vive')
+        const eventCreated = new PostAddedEvent(uuidv4(), '-rantext')
         const result = await this.SQLPostRepository.savePost( eventCreated.post_id, eventCreated.content )
         this.eventBus.publisher(suscription.id, eventCreated)
         suscription.unsuscribe()   
-    
+        
     }
 
 }

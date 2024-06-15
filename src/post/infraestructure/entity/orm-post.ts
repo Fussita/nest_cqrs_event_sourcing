@@ -2,7 +2,7 @@ import { Column, Entity, PrimaryColumn } from "typeorm"
 
 @Entity()
 export class OrmPost {
-    @PrimaryColumn( {type: 'uuid'} )
+    @PrimaryColumn( {type: 'uuid'}  )
     id: string
     @Column( 'varchar' )
     content: string
