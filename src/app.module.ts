@@ -3,7 +3,8 @@ import { ConfigModule } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { ScheduleModule } from '@nestjs/schedule';
 import { PostController } from './post/infraestructure/controller/post-controller';
-import { CQRSDatabaseProvider } from './common/infraestructure/provider/cqrs-db-provider';
+import { MongoDataBaseProvider } from './common/infraestructure/provider/nosql/mongo-db-provider';
+import { PostgresDataBaseProvider } from './common/infraestructure/provider/sql/postgres-db-provider';
 
 @Module({
   imports: [
@@ -18,7 +19,8 @@ import { CQRSDatabaseProvider } from './common/infraestructure/provider/cqrs-db-
     PostController
   ],
   providers: [
-    ...CQRSDatabaseProvider
+    MongoDataBaseProvider,
+    PostgresDataBaseProvider
   ],
 })
 export class AppModule {}

@@ -11,10 +11,9 @@ import { OrmPostRepository } from "../repository/orm-post-repository";
 @Controller('post')
 export class PostController {
 
-    noSQLPostRepository: IPostRepository 
-    SQLPostRepository: IPostRepository
-    eventBus: EventBus
-    id_testing = '4f83b9ee-7489-4c06-9069-f3ea6471d9cf'
+    private noSQLPostRepository: IPostRepository 
+    private SQLPostRepository: IPostRepository
+    private eventBus: EventBus
         
     constructor(
         @Inject('SQLDataSource') ormDS: DataSource,
@@ -23,18 +22,6 @@ export class PostController {
         this.noSQLPostRepository = new OdmPostRepository( odmDS )
         this.SQLPostRepository = new OrmPostRepository( ormDS )
         this.eventBus = EventBus.getInstance()
-    }
-
-    @Get('sql') 
-    async readsql() {
-        const result = await this.SQLPostRepository.getPostById(this.id_testing)
-        return result
-    }
-
-    @Get('nosql') 
-    async readnosql() {
-        const result = await this.noSQLPostRepository.getPostById(this.id_testing)
-        return result
     }
 
     @Get('write')

@@ -1,6 +1,5 @@
 import { OdmPost, OdmPostSchema } from '../entity/odm-post'
 import { Model, Mongoose } from 'mongoose';
-import { PostEntity } from 'src/post/domain/entity/post-entity';
 import { IPostRepository } from 'src/post/domain/repository/post-repository.interface';
 
 export class OdmPostRepository implements IPostRepository {
@@ -22,15 +21,5 @@ export class OdmPostRepository implements IPostRepository {
         const resultUpdate = await resultFind.updateOne( { content: content, last_modified_date: new Date() }  )
     }
     
-    async getPostById( id: string ): Promise<PostEntity> {
-        const result = await this.model.findOne( { id_post: id } )
-        return PostEntity.create( result.id, result.content )
-    }
-
-    async getPostByContent( content: string ): Promise<PostEntity> {
-        const result = await this.model.findOne( { content: content } )
-        return PostEntity.create( result.id, result.content )
-    }
-
 }
 

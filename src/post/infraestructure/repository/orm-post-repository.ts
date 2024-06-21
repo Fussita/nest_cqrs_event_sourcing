@@ -1,14 +1,13 @@
 import { DataSource, Repository } from 'typeorm'
 import { OrmPost } from '../entity/orm-post'
 import { IPostRepository } from 'src/post/domain/repository/post-repository.interface'
-import { PostEntity } from 'src/post/domain/entity/post-entity'
 
 export class OrmPostRepository extends Repository<OrmPost> implements IPostRepository {
 
     constructor( ormDS: DataSource ) {
         super( OrmPost, ormDS.createEntityManager() )
     }
-
+/*
     async getPostByContent( content: string ): Promise<PostEntity> {
         const result = await this.findOneBy( { content: content } )
         return PostEntity.create( result.id, result.content )
@@ -18,7 +17,7 @@ export class OrmPostRepository extends Repository<OrmPost> implements IPostRepos
         const result = await this.findOneBy( { id: id } )
         return PostEntity.create( result.id, result.content )
     }
-    
+  */  
     async savePost( id: string, content: string ) {
         const date = new Date()
         const orm = OrmPost.create(id, content, date)

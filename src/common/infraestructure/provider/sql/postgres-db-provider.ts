@@ -3,7 +3,7 @@ import { DataSource, getMetadataArgsStorage } from "typeorm"
 
 export const PostgresDataBaseProvider: Provider = 
     {
-        provide: 'PostgresDataSource',
+        provide: 'SQLDataSource',
         useFactory: async () => {
             const dataSource = new DataSource({
                 type: 'postgres',
